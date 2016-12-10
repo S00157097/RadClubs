@@ -1,0 +1,41 @@
+﻿@model IEnumerable<ClubManager.Models.ClubModels.Member>
+
+<table class="table table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.student.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.student.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Approved)
+        </th>
+        <th>
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.student.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.student.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Approved)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.MemberId }, new { @class = "btn btn-info" })
+
+                @if (User.IsInRole("Admin") || User.IsInRole("ClubAdmin"))
+                {
+                    @Html.ActionLink("Edit", "Edit", new { id = item.MemberId }, new { @class = "btn btn-info" })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.MemberId }, new { @class = "btn btn-danger" })
+                }
+            </td>
+        </tr>
+    }
+</table>

@@ -1,0 +1,11 @@
+﻿ApplicationDBContext
+
+Enable-Migrations -ContextTypeName ClubManager.Models.ApplicationDbContext -MigrationsDirectory Migrations\ApplicationMigrations
+Add-Migration -ConfigurationTypeName ClubManager.Migrations.ApplicationMigrations.Configuration "Init"
+Update-Database -ConfigurationTypeName ClubManager.Migrations.ApplicationMigrations.Configuration
+
+ClubDBContext
+
+Enable-Migrations -ContextTypeName ClubManager.Models.ClubModels.ClubDbContext -MigrationsDirectory Migrations\ClubMigrations
+Add-Migration -ConfigurationTypeName ClubManager.Migrations.ClubMigrations.Configuration "Init"
+Update-Database -ConfigurationTypeName ClubManager.Migrations.ClubMigrations.Configuration

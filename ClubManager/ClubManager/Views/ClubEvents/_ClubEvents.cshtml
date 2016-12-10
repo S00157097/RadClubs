@@ -1,0 +1,48 @@
+﻿@model IEnumerable<ClubManager.Models.ClubModels.ClubEvent>
+
+<table class="table table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Venue)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Location)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StartDateTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EndDateTime)
+        </th>
+        <th>
+            @if (User.IsInRole("ClubAdmin") || User.IsInRole("Admin"))
+            {
+                @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-sm btn-primary" })
+            }
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.Venue)</td>
+            <td>@Html.DisplayFor(modelItem => item.Location)</td>
+            <td>@Html.DisplayFor(modelItem => item.StartDateTime)</td>
+            <td>@Html.DisplayFor(modelItem => item.EndDateTime)</td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.EventId }, new { @class = "btn btn-sm btn-info" })
+                @if (User.Identity.IsAuthenticated)
+                {
+                    @Html.ActionLink("Attend", "Attend", new { id = item.EventId }, new { @class = "btn btn-sm btn-info" })
+                }
+
+                @if (User.IsInRole("ClubAdmin") || User.IsInRole("Admin"))
+                {
+                    @Html.ActionLink("Edit", "Edit", new { id = item.EventId }, new { @class = "btn btn-sm btn-info" })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.EventId }, new { @class = "btn btn-sm btn-danger" })
+                }
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,70 @@
+﻿@model IEnumerable<ClubManager.Models.ClubModels.Club>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Clubs</h2>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-6">
+            <div class="thumbnail">
+                <div class="caption">
+                    <h3 class="text-right">@Html.DisplayFor(model => item.ClubName)</h3>
+
+                    <p class="text-right">@Html.DisplayFor(model => item.CreationDate)</p>
+
+                    <p>
+                        @Html.ActionLink("See More", "Details", "Clubs", new { id = item.ClubId }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Join", "Join", "Clubs", new { id = item.ClubId }, new { @class = "btn btn-default" })
+
+                        @if (User.IsInRole("Admin"))
+                        {
+                            @Html.ActionLink("Delete", "Delete", "Clubs", new { id = item.ClubId }, new { @class = "btn btn-danger" })
+                        }
+                    </p>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ClubName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreationDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AdminId)
+            </th>
+            <th></th>
+        </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClubName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreationDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AdminId)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.ClubId }) |
+                @Html.ActionLink("Details", "Details", new { id=item.ClubId }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.ClubId })
+            </td>
+        </tr>
+    }
+
+    </table>*@
